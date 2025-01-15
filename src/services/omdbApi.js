@@ -6,12 +6,14 @@ import axios from "axios";
  * @constant {string} BASE_URL
  * @see {@link http://www.omdb.com/} OMDb API Documentation
  */
-const BASE_URL = `http://www.omdb.com/`;
+const BASE_URL = `https://www.omdbapi.com/`;
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 
 export const fetchAllMovies = async (page = 1) => {
   try {
-    const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&i=${page}`);
+    const response = await axios.get(
+      `${BASE_URL}?apikey=${API_KEY}&s=movie&page=${page}`
+    );
     return response.data;
   } catch (error) {
     console.log({ Error: error.message });
