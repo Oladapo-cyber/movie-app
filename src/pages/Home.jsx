@@ -3,23 +3,35 @@ import { fetchAllMovies } from "../services/omdbApi";
 import TrendingMovieCard from "../components/TrendingMovieCard";
 
 function Home() {
+  // State to store all movies fetched from the API
   const [movies, setMovies] = useState([]);
+  // State to manage loading state during API calls
   const [loading, setLoading] = useState(true);
+  // State to store first 3 movies as trending movies
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
+    // Async function to fetch movie data from the API
     const fetchData = async () => {
+      // Fetch movies data from OMDB API
       const data = await fetchAllMovies();
       console.log(data.Search);
-      setMovies(data.Search); //Set the movies state with the data from the API
+      // Update movies state with all fetched movies
+      setMovies(data.Search);
+      // Take first 3 movies for trending section
       setTrendingMovies(data.Search.slice(0, 3));
       console.log(trendingMovies);
     };
+
+    // Call the fetch function
     fetchData();
-    //Dependenies array is empty, so this effect will only run once after the initial render
+    // Empty dependency array means this effect runs once on component mount
   }, []);
+
   return (
     <div>
+      {/* Map through trending movies and render TrendingMovieCard component for each */}
+      {/* Optional chaining (?.) prevents errors if trendingMovies is null/undefined */}
       {trendingMovies?.map((movie) => (
         <TrendingMovieCard key={movie.imdbID} movie={movie} />
       ))}
@@ -28,5 +40,3 @@ function Home() {
 }
 
 export default Home;
-
-//rfce is the shortcut to add a basic syntax to the react component as it shouldn't be left empty
