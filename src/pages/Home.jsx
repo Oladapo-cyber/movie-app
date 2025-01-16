@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAllMovies } from "../services/omdbApi";
 import TrendingMovieCard from "../components/TrendingMovieCard";
+import { trendingMoviesData } from "../data/data";
 
 function Home() {
   // State to store all movies fetched from the API
@@ -18,13 +19,11 @@ function Home() {
       console.log(data.Search);
       // Update movies state with all fetched movies
       setMovies(data.Search);
-      // Take first 3 movies for trending section
-      setTrendingMovies(data.Search.slice(0, 3));
-      console.log(trendingMovies);
     };
 
     // Call the fetch function
     fetchData();
+    setTrendingMovies(trendingMoviesData);
     // Empty dependency array means this effect runs once on component mount
   }, []);
 
