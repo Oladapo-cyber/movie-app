@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
-
 import TrendingMovieCard from "../components/TrendingMovieCard";
 import { trendingMoviesData } from "../data/data";
+import { fetchAllMovies } from "../services/omdbApi";
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      const movies = await fetchAllMovies();
+      console.log(movies);
+      setMovies(movies.Search);
+    };
+
+    fetchMovies();
+
     setTrendingMovies(trendingMoviesData);
   }, []);
 
@@ -47,6 +56,16 @@ const Home = () => {
             />
           ))}
         </div>
+      </div>
+      <div className="px-8 mt-8">
+        <h2>Trending</h2>
+        <d iv className="grid grid-cols-4 mt-8 gap-4">
+          {movies.map((movie) => (
+            <div key={movie.imdbID} className="flex gap-4">
+              <img src={movie.Poster} className="h-80" alt="" />
+            </div>
+          ))}
+        </d>
       </div>
     </div>
   );
