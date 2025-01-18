@@ -41,7 +41,7 @@ export const fetchMovieByTitle = async (title) => {
   try {
     // Send GET request with API key and movie title
     const response = await axios.get(
-      `${BASE_URL}?apikey=${API_KEY}*T=${title} `
+      `${BASE_URL}?apikey=${API_KEY}&t=${encodeURIComponent(title)}`
     );
     // Return search results
     return response.data;
