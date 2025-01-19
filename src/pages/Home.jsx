@@ -10,8 +10,8 @@ const Home = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       const movies = await fetchAllMovies();
-      console.log(movies);
       setMovies(movies.Search);
+      console.log(movies);
     };
 
     fetchMovies();
@@ -59,13 +59,22 @@ const Home = () => {
       </div>
       <div className="px-8 mt-8">
         <h2>Trending</h2>
-        <d iv className="grid grid-cols-4 mt-8 gap-4">
+        <div className="grid grid-cols-4 mt-8 gap-4">
           {movies.map((movie) => (
-            <div key={movie.imdbID} className="flex gap-4">
+            <div key={movie.imdbID} className="flex flex-col gap-4">
               <img src={movie.Poster} className="h-80" alt="" />
+              {/* Had issues trying to render the movie title, was adding the movie.Title as a key inside the opening p tag,
+               when the container div has already accessed */}
+              <p className="text-sm font-bold text-black">{movie.Title}</p>
+              <div className="flex justify-between">
+                <p className="text-[#666666]">{movie.Year}</p>
+                <p className="text-[#666666] border-2 px-2 rounded-lg font-semibold">
+                  {movie.Type}
+                </p>
+              </div>
             </div>
           ))}
-        </d>
+        </div>
       </div>
     </div>
   );
