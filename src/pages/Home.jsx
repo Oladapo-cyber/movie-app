@@ -64,11 +64,11 @@ const Home = () => {
             <div key={movie.imdbID} className="flex flex-col gap-4">
               <img src={movie.Poster} className="h-80" alt="" />
               {/* Had issues trying to render the movie title, was adding the movie.Title as a key inside the opening p tag,
-               when the container div has already accessed */}
+               when the container div has already accessed movie.imdbID requiring me to only target what I need to render.*/}
               <p className="text-sm font-bold text-black">{movie.Title}</p>
               <div className="flex justify-between">
                 <p className="text-[#666666]">{movie.Year}</p>
-                <p className="text-[#666666] border-2 px-2 rounded-lg font-semibold">
+                <p className="text-[#666666] flex items-center justify-center border-2 px-2 rounded-lg font-semibold">
                   {movie.Type}
                 </p>
               </div>
