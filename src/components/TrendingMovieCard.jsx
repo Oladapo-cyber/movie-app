@@ -5,7 +5,7 @@ import { FaAngleLeft, FaAngleRight, FaPlay, FaYoutube } from "react-icons/fa";
 // TrendingMovieCard component displays trending movie information in a card format
 function TrendingMovieCard({ movie, handleScroll }) {
   return (
-    <div className="relative w-[77.5rem] text-[#e2e2e2] rounded-xl">
+    <div className="relative w-[77rem] text-[#e2e2e2] rounded-xl">
       <button className="absolute top-4 left-5 px-4 py-1 rounded-2xl bg-slate-200/20">
         Now Trending 🔥
       </button>
