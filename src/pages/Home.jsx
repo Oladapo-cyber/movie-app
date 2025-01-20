@@ -37,7 +37,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative ml-56 mt-28 overflow-hidden">
       <div
         className="w-full overflow-x-hidden scroll-smooth"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -57,18 +57,23 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="px-8 mt-8">
+      <div className="px-8 mt-8 bg-[#212121]">
         <h2>Trending</h2>
-        <div className="grid grid-cols-4 mt-8 gap-4">
+        <div className="grid grid-cols-4 mt-8 gap-4 bg-[#212121]">
           {movies.map((movie) => (
-            <div key={movie.imdbID} className="flex flex-col gap-4">
+            <div
+              key={movie.imdbID}
+              className="flex flex-col place-items-center gap-4"
+            >
               <img src={movie.Poster} className="h-80" alt="" />
-              {/* Had issues trying to render the movie title, was adding the movie.Title as a key inside the opening p tag,
+              {/* Had issues trying to render the movie title, was adding the movie. Title as a key inside the opening p tag,
                when the container div has already accessed movie.imdbID requiring me to only target what I need to render.*/}
-              <p className="text-sm font-bold text-black">{movie.Title}</p>
-              <div className="flex justify-between">
-                <p className="text-[#666666]">{movie.Year}</p>
-                <p className="text-[#666666] flex items-center justify-center border-2 px-2 rounded-lg font-semibold">
+              <p className="text-sm font-bold text-white">{movie.Title}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-white flex justify-start items-start">
+                  {movie.Year}
+                </p>
+                <p className="text-white flex justify-end text-center border-2 px-2 rounded-lg font-semibold">
                   {movie.Type}
                 </p>
               </div>
