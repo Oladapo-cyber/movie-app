@@ -13,8 +13,7 @@ const Home = () => {
       setMovies(movies.Search);
       console.log(movies);
     };
-
-    fetchMovies();
+    -fetchMovies();
 
     setTrendingMovies(trendingMoviesData);
   }, []);
@@ -57,8 +56,12 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="px-8 mt-8 bg-[#212121]">
-        <h2>Trending</h2>
+
+      <div className="px-8 mt-8 bg-[#212121] pb-14">
+        <h2 className="p-1 text-2xl font-semibold text-center w-fit">
+          Trending
+        </h2>
+
         <div className="grid grid-cols-4 mt-8 gap-4 bg-[#212121]">
           {movies.map((movie) => (
             <div
@@ -69,11 +72,11 @@ const Home = () => {
               {/* Had issues trying to render the movie title, was adding the movie. Title as a key inside the opening p tag,
                when the container div has already accessed movie.imdbID requiring me to only target what I need to render.*/}
               <p className="text-sm font-bold text-white">{movie.Title}</p>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-center gap-20">
                 <p className="text-white flex justify-start items-start">
                   {movie.Year}
                 </p>
-                <p className="text-white flex justify-end text-center border-2 px-2 rounded-lg font-semibold">
+                <p className="text-white flex text-center border-2 px-2 pb-1 rounded-lg font-semibold">
                   {movie.Type}
                 </p>
               </div>
