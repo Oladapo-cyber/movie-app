@@ -5,6 +5,7 @@ import MovieDetails from "./pages/MovieDetails";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
+import NotFound from "./pages/NotFound";
 
 // Main App component that serves as the root of the application
 const App = () => {
@@ -25,7 +26,9 @@ const App = () => {
           {/* Home route - displays Home component at root path */}
           <Route path="/" element={<Home />} />
           {/* Dynamic route for movie details - :id is a URL parameter */}
-          <Route path="/movies/:id" element={<MovieDetails />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/tv/:id" element={<MovieDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
 
