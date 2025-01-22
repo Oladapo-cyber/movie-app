@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
 import TrendingMovieCard from "../components/TrendingMovieCard";
 import { trendingMoviesData } from "../data/data";
-import { fetchAllMovies } from "../services/omdbApi";
+import { fetchAllMovies, options } from "../services/omdbApi";
+import MovieCard from "../components/MovieCard";
+import axios from "axios";
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const movies = await fetchAllMovies();
-      setMovies(movies.Search);
-      console.log(movies);
-    };
-    -fetchMovies();
+    const trendingMoviesUrl = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`;
+    const moviesUrl = `https://api.themoviedb.org/3/trending/all/week?language=en-US`;
 
-    setTrendingMovies(trendingMoviesData);
+    const fetch = async () => {
+      try {
+        const response = await axios.get(trendingMoviesUrl, options);
+        console.log(response.data.results);
+        setTrendingMovies(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(moviesUrl, options);
+        console.log(response.data.results);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMovies();
+    fetch(); // Call the fetch function to get the data
   }, []);
 
   const handleScroll = (direction) => {
@@ -38,18 +56,18 @@ const Home = () => {
   return (
     <div className="relative ml-56 mt-28 overflow-hidden">
       <div
-        className="w-full overflow-x-hidden scroll-smooth"
+        className="w-full overflow-x-hidden scroll-smooth mt-5 "
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div
-          className="flex justify-around w-fit gap-20 px-10"
+          className="flex justify-around w-fit gap-20 drop-shadow-xl px-10"
           onWheel={(e) => e.preventDefault()}
           onScroll={(e) => e.preventDefault()}
           onTouchMove={(e) => e.preventDefault()}
         >
           {trendingMovies?.map((movie) => (
             <TrendingMovieCard
-              key={movie.title}
+              key={movie.id}
               movie={movie}
               handleScroll={handleScroll}
             />
@@ -57,30 +75,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="px-8 mt-8 bg-[#212121] pb-14">
-        <h2 className="p-1 text-2xl font-semibold text-center w-fit">
-          Trending
-        </h2>
-
-        <div className="grid grid-cols-4 mt-8 gap-4 bg-[#212121]">
+      <div className="px-8 bg-[#212121] mt-8">
+        <h2>Trending</h2>
+        <div className="grid bg-[#212121] grid-cols-5 place-items-center py-8 gap-4">
           {movies.map((movie) => (
-            <div
-              key={movie.imdbID}
-              className="flex flex-col place-items-center gap-4"
-            >
-              <img src={movie.Poster} className="h-80" alt="" />
-              {/* Had issues trying to render the movie title, was adding the movie. Title as a key inside the opening p tag,
-               when the container div has already accessed movie.imdbID requiring me to only target what I need to render.*/}
-              <p className="text-sm font-bold text-white">{movie.Title}</p>
-              <div className="flex items-center justify-center gap-20">
-                <p className="text-white flex justify-start items-start">
-                  {movie.Year}
-                </p>
-                <p className="text-white flex text-center border-2 px-2 pb-1 rounded-lg font-semibold">
-                  {movie.Type}
-                </p>
-              </div>
-            </div>
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       </div>

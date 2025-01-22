@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { options } from "../services/omdbApi";
 import {
   FaPlay,
@@ -9,16 +9,19 @@ import {
   FaThumbsUp,
   FaVideo,
 } from "react-icons/fa";
-import { FcGenericSortingDesc } from "react-icons/fc";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
+  const { pathname } = useLocation();
+  const tvPath = pathname.includes("tv");
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+      const url = `https://api.themoviedb.org/3/${
+        tvPath ? "tv" : "movie"
+      }/${id}?language=en-US`;
+
       try {
         const response = await axios.get(url, options);
         setMovie(response.data);
@@ -28,21 +31,21 @@ const MovieDetails = () => {
       }
     };
     fetchMovieDetails();
-  }, [id]);
+  }, [id, tvPath]);
 
   return (
-    <div className="relative flex text-zinc-400 bg-[#212121] flex-col h-full items-center mt-10">
+    <div className="relative flex text-zinc-400 bg-[#212121] flex-col h- items-center mt-10">
       <img
         src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
         alt=""
         className=""
       />
       <div className="absolute flex z-10 bg-slate-100 text-black h-[28rem] w-[70%] mt-96 ml-[15rem] rounded-2xl p-4 pt-6">
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <img
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
             alt=""
-            className="h-60 w-60 rounded-lg"
+            className="h-[20rem] object-contain rounded-xl"
           />
 
           <p className="pt-2">
