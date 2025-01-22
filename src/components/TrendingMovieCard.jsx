@@ -11,25 +11,25 @@ function TrendingMovieCard({ movie, handleScroll }) {
       </button>
       {/* Movie poster image */}
       <img
-        src={movie.poster}
+        src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
         className="w-full object-cover rounded-3xl h-[30rem]"
         alt=""
       />
       <div className="absolute bottom-0 w-full p-4 flex items-end justify-between">
         <div>
           <div className="gap-2 flex items-center">
-            {movie.genres.map((genre, index) => (
+            {/* {movie.genres.map((genre, index) => (
               <span
                 key={index}
                 className="text-xs bg-slate-200/20 px-2 py-1 rounded-2xl"
               >
                 {genre}
               </span>
-            ))}
+            ))} */}
           </div>
           <div className="mt-2 flex flex-col items-start gap-3">
             <h2 className="text-3xl font-bold mt-2">{movie.title}</h2>
-            <p className="text-sm w-[50%]">{movie.plot}</p>
+            <p className="text-sm w-[50%]">{movie.overview}</p>
           </div>
           {/* The "*" selector is used to target everything that falls under the container where the
            styling is applied, example below where more than one button need certain similar styling. */}
