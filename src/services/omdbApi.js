@@ -36,18 +36,10 @@ export const fetcMovieDetailsById = async (id) => {
   }
 };
 
-// Searches for movies by title
-export const fetchMovieByTitle = async (title) => {
-  try {
-    // Send GET request with API key and movie title
-    const response = await axios.get(
-      `${BASE_URL}?apikey=${API_KEY}&t=${encodeURIComponent(title)}`
-    );
-    // Return search results
-    return response.data;
-  } catch (error) {
-    // Log error and return null if request fails
-    console.log({ Error: error.message });
-    return null;
-  }
+export const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.VITE_TMDB_API_KEY,
+  },
 };
