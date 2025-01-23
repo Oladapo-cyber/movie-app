@@ -9,6 +9,7 @@ import {
   FaThumbsUp,
   FaVideo,
 } from "react-icons/fa";
+import Recommendations from "../components/Recommendations";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -34,18 +35,18 @@ const MovieDetails = () => {
   }, [id, tvPath]);
 
   return (
-    <div className="relative flex text-zinc-400 bg-[#212121] flex-col h- items-center mt-10">
+    <div className="relative flex text-zinc-400 w-4/5 ml-[20%] bg-[#212121] flex-col items-center mt-10">
       <img
         src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
         alt=""
         className=""
       />
-      <div className="absolute flex z-10 bg-slate-100 text-black h-[28rem] w-[70%] mt-96 ml-[15rem] rounded-2xl p-4 pt-6">
+      <div className="absolute flex z-10 bg-slate-100 text-black h-[28rem] w-[90%]  mt-96 rounded-2xl p-4 pt-6">
         <div className="flex flex-col ">
           <img
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
             alt=""
-            className="h-[20rem] object-contain rounded-xl"
+            className="h-[15rem] object-cover h rounded-xl"
           />
 
           <p className="pt-2">
@@ -55,10 +56,10 @@ const MovieDetails = () => {
           </p>
           <div className="py-[1.5px] px-15 bg-[#1baf69] "></div>
           <div className="flex mt-2 gap-3">
-            <button className="flex items-center gap-1 font-semibold text-lg text-white bg-[#1baf69] px-4 rounded-sm">
+            <button className="flex items-center gap-1 font-medium text-base text-white bg-[#1baf69] px-4 rounded-sm">
               <FaThumbsUp /> Like
             </button>
-            <button className="flex items-center gap-1 font-semibold text-lg bg-[#444444]  text-white px-2 rounded-sm">
+            <button className="flex items-center gap-1 font-medium text-base bg-[#444444] text-white px-2 rounded-sm">
               <FaThumbsDown /> Dislike
             </button>
           </div>
@@ -84,7 +85,7 @@ const MovieDetails = () => {
           </div>
           <p className="pt-3">{movie?.overview}</p>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between pr-10">
             <ul className="mt-3">
               <li>
                 <span className="text-base font-semibold">Released: </span>
@@ -98,7 +99,7 @@ const MovieDetails = () => {
               </li>
             </ul>
 
-            <ul className="mt-3">
+            <ul className="mt-3 pr-32">
               <li>
                 <span className="text-base font-semibold">Runtime: </span>
                 {movie?.runtime} Mins
@@ -117,12 +118,9 @@ const MovieDetails = () => {
               </li>
             </ul>
           </div>
-
-          <div></div>
-
-          <div></div>
         </div>
       </div>
+      <Recommendations id={id} tvPath={tvPath} />
     </div>
   );
 };
