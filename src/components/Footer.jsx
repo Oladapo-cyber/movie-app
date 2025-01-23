@@ -2,7 +2,7 @@ import animelogo from "../assets/anime-logo.png";
 
 function Footer() {
   return (
-    <div className="bg-[#1c1c1c] ml-[15rem] gap-40 flex flex-row h-[45%]">
+    <div className="bg-[#1c1c1c] w-4/5 ml-[20%] gap-40 flex flex-row h-[45%]">
       <div className="relative flex flex-row mt-20 justify-start text-xs p-10">
         <img
           className="absolute w-auto h-[3rem] flex place-items-end items-end"
