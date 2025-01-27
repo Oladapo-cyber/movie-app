@@ -41,7 +41,7 @@ const MovieDetails = () => {
         alt=""
         className=""
       />
-      <div className="absolute flex z-10 bg-slate-100 text-black h-[28rem] w-[90%]  mt-96 rounded-2xl p-4 pt-6">
+      <div className="absolute flex z-10 bg-slate-200 text-black h-[27rem] w-[90%]  mt-[37rem] rounded-2xl p-4 pt-6">
         <div className="flex flex-col ">
           <img
             src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
