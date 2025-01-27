@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import NotFound from "./pages/NotFound";
+import WatchNow from "./pages/WatchNow";
 
 // Main App component that serves as the root of the application
 const App = () => {
@@ -28,6 +29,8 @@ const App = () => {
           {/* Dynamic route for movie details - :id is a URL parameter */}
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/tv/:id" element={<MovieDetails />} />
+          <Route path="/watch-movie/:id" element={<WatchNow />} />
+          <Route path="watch-tv/:id" element={<WatchNow />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
