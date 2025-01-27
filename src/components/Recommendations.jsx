@@ -28,7 +28,7 @@ const Recommendations = ({ id, tvPath }) => {
   }, [tvPath, id]);
 
   return (
-    <div className="bg-slate-800/60 mt-40 p-10 w-full ">
+    <div className="bg-slate-800/60 pt-[23rem] p-10 w-full ">
       <h2 className="text-2xl font-semibold">Recommended Watches</h2>
 
       <div className="grid grid-cols-5 mt-10 gap-4">
