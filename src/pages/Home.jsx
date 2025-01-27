@@ -54,7 +54,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative ml-56 mt-28 overflow-hidden">
+    <div className="relative width-4/5 ml-[20%] mt-28 overflow-hidden">
       <div
         className="w-full overflow-x-hidden scroll-smooth mt-5 "
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}

@@ -5,7 +5,7 @@ import { FaAngleLeft, FaAngleRight, FaPlay, FaYoutube } from "react-icons/fa";
 // TrendingMovieCard component displays trending movie information in a card format
 function TrendingMovieCard({ movie, handleScroll }) {
   return (
-    <div className="relative w-[77rem] text-[#e2e2e2] rounded-xl">
+    <div className="relative w-[73rem] flex items-center text-[#e2e2e2] rounded-xl">
       <button className="absolute top-4 left-5 px-4 py-1 rounded-2xl bg-slate-200/20">
         Now Trending 🔥
       </button>
@@ -29,7 +29,7 @@ function TrendingMovieCard({ movie, handleScroll }) {
           </div>
           <div className="mt-2 flex flex-col items-start gap-3">
             <h2 className="text-3xl font-bold mt-2">{movie.title}</h2>
-            <p className="text-sm w-[50%]">{movie.overview}</p>
+            <p className="text-sm w-[50%] pb-5">{movie.overview}</p>
           </div>
           {/* The "*" selector is used to target everything that falls under the container where the
            styling is applied, example below where more than one button need certain similar styling. */}
