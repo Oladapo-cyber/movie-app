@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import {
   FaPlay,
   FaPlus,
@@ -8,10 +9,33 @@ import {
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
+import { options } from "../services/omdbApi";
+import axios from "axios";
 
-const MovieDetailsCard = ({ movie }) => {
+const MovieDetailsCard = ({ movie, absolute }) => {
+  const [cast, setCast] = useState([]);
+  const [hover, setHover] = useState({ index: null, show: false });
+
+  useEffect(() => {
+    const fetchCast = async () => {
+      const url = `https://api.themoviedb.org/3/movie/${movie?.id}/credits`;
+      console.log(movie.id);
+      try {
+        const response = await axios.get(url, options);
+        setCast(response.data.cast.slice(0, 5));
+        console.log(response.data.cast.slice(0, 5));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCast();
+  }, [movie?.id]);
   return (
-    <div className="absolute flex z-10 bg-red-200 text-black h-[27rem] w-[90%]  mt-[37rem] rounded-2xl p-4 pt-6">
+    <div
+      className={`${
+        absolute ? `absolute bg-white` : `bg-green-700`
+      }   flex z-10  text-black h-[29rem] w-[90%]  mt-[37rem] rounded-2xl p-4 pt-6`}
+    >
       <div className="flex flex-col ">
         <img
           src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
@@ -29,7 +53,7 @@ const MovieDetailsCard = ({ movie }) => {
           <button className="flex items-center gap-1 font-medium text-base text-white bg-[#1baf69] px-4 rounded-sm">
             <FaThumbsUp /> Like
           </button>
-          <button className="flex items-center gap-1 font-medium text-base bg-[#444444] text-white px-2 rounded-sm">
+          <button className="flex items-center gap-1 font-medium text-base bg-[#1f2630] text-white px-2 rounded-sm">
             <FaThumbsDown /> Dislike
           </button>
         </div>
@@ -62,7 +86,7 @@ const MovieDetailsCard = ({ movie }) => {
         </div>
         <p className="pt-3">{movie?.overview}</p>
 
-        <div className="flex justify-between pr-10">
+        <div className="flex justify-between gap-10 pr-10">
           <ul className="mt-3">
             <li>
               <span className="text-base font-semibold">Released: </span>
@@ -73,6 +97,38 @@ const MovieDetailsCard = ({ movie }) => {
               {movie?.genres.map((genre) => (
                 <span key={genre.id}>{genre.name},</span>
               ))}
+            </li>
+
+            <li className="flex gap-1 relative">
+              <span className="font-semibold font-oswald flex flex-wrap ">
+                Casts:
+              </span>{" "}
+              <span>
+                {cast?.map((actor, index) => (
+                  <div key={actor.id} className="inline space-x-6 ">
+                    <span
+                      className="cursor-pointer hover:underline inline-flex mr-1 flex-nowrap"
+                      onMouseEnter={() => setHover({ index, show: true })}
+                      onMouseLeave={() =>
+                        setHover({ index: null, show: false })
+                      }
+                    >
+                      {actor.name}
+                      {index !== cast.length - 1 ? ", " : ""}
+                      {hover.index === index && hover.show && (
+                        <span className="bg-blur p-2 flex flex-col w-fit items-center justify-center rounded-xl font-semibold absolute top-[-6.5rem]">
+                          <img
+                            className="h-20 w-20 object-cover rounded-full"
+                            src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`}
+                            alt=""
+                          />
+                          {actor.character}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </span>
             </li>
           </ul>
 
