@@ -30,13 +30,13 @@ const MovieDetails = () => {
   }, [id, tvPath]);
 
   return (
-    <div className="relative flex text-zinc-400 w-4/5 ml-[20%] bg-[#212121] flex-col items-center mt-10">
+    <div className="relative flex text-zinc-400 w-4/5 ml-[20%] bg-[#212121] flex-col items-center mt-20">
       <img
         src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
         alt=""
         className=""
       />
-      <MovieDetailsCard movie={movie} />
+      <MovieDetailsCard movie={movie} absolute={true} />
       <Recommendations id={id} tvPath={tvPath} />
     </div>
   );
