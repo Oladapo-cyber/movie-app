@@ -1,5 +1,5 @@
 // Import necessary components and dependencies from react-router-dom and local files
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, matchPath } from "react-router-dom";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import Footer from "./components/Footer";
@@ -10,6 +10,17 @@ import WatchNow from "./pages/WatchNow";
 
 // Main App component that serves as the root of the application
 const App = () => {
+  const location = useLocation();
+  console.log(location);
+
+  // Define route patterns where SideBar and Footer should be hidden
+  const hideSideBarFooterPaths = ["/watch-movie/:id", "/watch-tv/:id"];
+
+  // Determine if the current path matches any of the hide patterns
+  const shouldHideSideBarFooter = hideSideBarFooterPaths.some((path) =>
+    matchPath({ path, end: false }, location.pathname)
+  );
+
   return (
     // Main container with dark background and light text colors using Tailwind CSS
     // h-screen ensures the app takes full viewport height
@@ -17,12 +28,10 @@ const App = () => {
       {/* Header component displayed at the top of the application */}
       <Header />
 
-      {/* Flex container for sidebar and main content */}
-      <div className="flex">
-        {/* Sidebar component for navigation */}
-        <SideBar />
+      <div className={` `}>
+        {/* Flex container for sidebar and main content */}
+        {!shouldHideSideBarFooter && <SideBar />}
 
-        {/* Routes component to handle different page navigation */}
         <Routes>
           {/* Home route - displays Home component at root path */}
           <Route path="/" element={<Home />} />
@@ -35,8 +44,8 @@ const App = () => {
         </Routes>
       </div>
 
-      {/* Footer component displayed at the bottom of the application */}
-      <Footer />
+      {/* Conditionally render Footer based on the current route */}
+      {!shouldHideSideBarFooter && <Footer />}
     </div>
   );
 };

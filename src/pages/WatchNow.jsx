@@ -55,7 +55,7 @@ const WatchNow = () => {
   };
 
   return (
-    <div className="h-full mt-24 w-screen flex flex-col items-center justify-center">
+    <div className="h-full mt-[5.5rem] w-screen flex flex-col items-center justify-center">
       {loading ? (
         <div className="w-full h-[80vh] md:h-[90vh] px-20 py-8 rounded-lg bg-gray-900 animate-pulse" />
       ) : manifestError ? (
