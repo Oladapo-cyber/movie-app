@@ -18,7 +18,7 @@ const Recommendations = ({ id, tvPath }) => {
         }/${id}/recommendations?language=en-US`;
         const response = await axios.get(url, options);
         console.log(response.data.results);
-        setRecommendations(response.data.results);
+        setRecommendations(response.data.results.slice(0, 15));
       } catch (error) {
         console.error(error);
       }

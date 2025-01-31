@@ -3,7 +3,7 @@
 import { FaAngleLeft, FaAngleRight, FaPlay, FaYoutube } from "react-icons/fa";
 
 // TrendingMovieCard component displays trending movie information in a card format
-function TrendingMovieCard({ movie, handleScroll }) {
+function TrendingMovieCard({ movie }) {
   return (
     <div className="relative w-[73rem] flex items-center text-[#e2e2e2] rounded-xl">
       <button className="absolute top-4 left-5 px-4 py-1 rounded-2xl bg-slate-200/20">
@@ -45,14 +45,14 @@ function TrendingMovieCard({ movie, handleScroll }) {
           </div>
         </div>
 
-        <div className="flex items-center *:bg-slate-300/40 gap-3 *:rounded-full *:p-4 *:justify-between ">
+        {/* <div className="flex items-center *:bg-slate-300/40 gap-3 *:rounded-full *:p-4 *:justify-between ">
           <button onClick={() => handleScroll("left")}>
             <FaAngleLeft />
           </button>
           <button onClick={() => handleScroll("right")}>
             <FaAngleRight />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie, loading }) => {
-  console.log(movie);
+  // console.log(movie);
   return (
     <>
       {loading ? (
