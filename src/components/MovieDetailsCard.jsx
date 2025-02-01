@@ -33,8 +33,8 @@ const MovieDetailsCard = ({ movie, absolute }) => {
   return (
     <div
       className={`${
-        absolute ? `absolute bg-white` : `bg-green-700`
-      }   flex z-10  text-black h-[29rem] w-[90%]  mt-[37rem] rounded-2xl p-4 pt-6`}
+        absolute ? `absolute bg-white mt-[37rem]` : `bg-green-700`
+      }   flex z-10  text-black h-[29rem] w-[90%]   rounded-2xl p-4 pt-6`}
     >
       <div className="flex flex-col ">
         <img
